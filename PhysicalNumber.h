@@ -1,6 +1,5 @@
-#include "Unit.h"
-
 using std::ostream, std::istream;
+#include "Unit.h"
 
 namespace ariel{
 
@@ -12,12 +11,12 @@ namespace ariel{
             PhysicalNumber(long units, int typeID); //constructor
             int getTypeID(); //getter
             double getUnits(); //getter
-            PhysicalNumber& operator+(const PhysicalNumber& other);
-            PhysicalNumber& operator+=(const PhysicalNumber& other);
-            PhysicalNumber& operator+ ();
-            PhysicalNumber& operator-(const PhysicalNumber& other);
-            PhysicalNumber& operator-=(const PhysicalNumber& other);
-            PhysicalNumber& operator- ();
+            PhysicalNumber& operator+(const PhysicalNumber& other); //diff-types adding
+            PhysicalNumber& operator+=(const PhysicalNumber& other); //adding
+            PhysicalNumber& operator+ (); //unary plus.
+            PhysicalNumber& operator-(const PhysicalNumber& other); //diff-types minus
+            PhysicalNumber& operator-=(const PhysicalNumber& other); //minus.
+            PhysicalNumber& operator- (); //unary minus.
             PhysicalNumber& operator++ ();
             PhysicalNumber& operator-- ();
             bool operator>(const PhysicalNumber& other);
