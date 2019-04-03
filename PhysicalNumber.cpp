@@ -150,8 +150,8 @@ ostream& ariel::operator<<(ostream& os, PhysicalNumber pn){
  };
             
 istream& ariel::operator>>(istream& is, PhysicalNumber pn){
-    PhysicalNumber newInput
-    is.getline('[')
+    // PhysicalNumber newInput
+    // is.getline('[')
     return is;
 };
 
