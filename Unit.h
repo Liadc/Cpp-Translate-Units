@@ -1,8 +1,8 @@
+#pragma once
 namespace ariel{
 
-  class Unit{
-    public:
-        enum {KM,M,CM,KG,G,TON,SEC,MIN,HOUR} typeID;
+  enum class Unit{
+    CM,G,SEC,M,KG,MIN,KM,TON,HOUR
   };
 
 }

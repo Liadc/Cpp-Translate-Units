@@ -1,15 +1,17 @@
-using std::ostream, std::istream;
+#pragma once
 #include "Unit.h"
+#include <iostream>
+
 
 namespace ariel{
 
     class PhysicalNumber{
         private:
-            int typeID;
+            Unit typeID;
             double units;
         public:
-            PhysicalNumber(long units, int typeID); //constructor
-            int getTypeID(); //getter
+            PhysicalNumber(double units, Unit type); //constructor
+            Unit getTypeID(); //getter
             double getUnits(); //getter
             PhysicalNumber& operator+(const PhysicalNumber& other); //diff-types adding
             PhysicalNumber& operator+=(const PhysicalNumber& other); //adding
@@ -25,9 +27,9 @@ namespace ariel{
             bool operator!= (const PhysicalNumber& other);
             bool operator<(const PhysicalNumber& other);
             bool operator<=(const PhysicalNumber& other);
-            PhysicalNumber& operator++ ();
-            PhysicalNumber& operator-- ();
-            friend ostream& operator<<(ostream& os, PhysicalNumber& pn);
-            friend istream& operator>> (istream& is, PhysicalNumber& pn);
+            friend std::ostream& operator<<(std::ostream& os, PhysicalNumber pn);
+            friend std::istream& operator>>(std::istream& is, PhysicalNumber pn);
+        private:
+            PhysicalNumber& translateUnit(const PhysicalNumber& other,bool opCode);
     };
 };
