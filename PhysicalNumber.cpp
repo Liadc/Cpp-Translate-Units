@@ -3,6 +3,7 @@
 #include <iostream>
 #include <cmath>
 
+
 using namespace std;
 using namespace ariel;
 
@@ -20,7 +21,7 @@ double PhysicalNumber::getUnits(){
 };
 
 PhysicalNumber& PhysicalNumber::translateUnit(const PhysicalNumber& other,bool opCode){
-    if(this->typeID == other.typeID){ //update this
+    if(this->typeID == other.typeID){ //same types. i don't think its even needed.
         return *this;
     }
     int dif = ((int)this->typeID - (int)other.typeID);
@@ -32,14 +33,14 @@ PhysicalNumber& PhysicalNumber::translateUnit(const PhysicalNumber& other,bool o
             case 0:case 1: //Length or Mass cases
                 if(opCode){ //opCode 1 for +
                     this->units += other.units*(pow(1000,(-dif)));
-                }else{
+                }else{ //opCode 0 for -
                     this->units -= other.units*(pow(1000,(-dif)));
                 }
                 break;
             case 2: //Time case
-                if(!opCode){ //opCode 0 for -
+                if(opCode){ //opCode 1 for +
                     this->units += other.units*(pow(60,(-dif)));
-                }else{
+                }else{//opCode 0 for -
                     this->units -= other.units*(pow(60,(-dif)));
                 }
                 break;
@@ -50,29 +51,37 @@ PhysicalNumber& PhysicalNumber::translateUnit(const PhysicalNumber& other,bool o
 
 PhysicalNumber& PhysicalNumber::operator+(const PhysicalNumber& other){ //add units same world
     Unit typeTemp(this->getTypeID());
+    if(this == &other){
+        double unitsTemp = this->getUnits()+this->getUnits();
+        PhysicalNumber a(unitsTemp,typeTemp);
+        return a;
+    }
     double unitsTemp = this->getUnits();
     PhysicalNumber a(unitsTemp,typeTemp);
-    a = a.translateUnit(other,1);
-    return a;
+    return a.translateUnit(other,1);
 };
 
 PhysicalNumber& PhysicalNumber::operator-(const PhysicalNumber& other){ //decrease units same world
     Unit typeTemp(this->getTypeID());
+    if(this == &other){
+        double unitsTemp = this->getUnits()-this->getUnits();
+        PhysicalNumber a(unitsTemp,typeTemp);
+        return a;
+    }
     double unitsTemp = this->getUnits();
     PhysicalNumber a(unitsTemp,typeTemp);
-    a = a.translateUnit(other,0);
-    return a;
+    return a.translateUnit(other,0);
 };
 
 //adding same-types   +=
 PhysicalNumber& PhysicalNumber::operator+=(const PhysicalNumber& other){
-    PhysicalNumber ans = (*this+other);
-    return ans;
+    *this = *this+other;
+    return *this;
 };
 
 PhysicalNumber& PhysicalNumber::operator-=(const PhysicalNumber& other){
-    PhysicalNumber ans = (*this-other);
-    return ans;
+    *this = *this-other;
+    return *this;
 };
 
 //unary plus
@@ -141,6 +150,8 @@ ostream& ariel::operator<<(ostream& os, PhysicalNumber pn){
  };
             
 istream& ariel::operator>>(istream& is, PhysicalNumber pn){
+    PhysicalNumber newInput
+    is.getline('[')
     return is;
 };
 
