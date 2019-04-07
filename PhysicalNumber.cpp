@@ -19,9 +19,6 @@ double PhysicalNumber::getUnits(){ return this->units; };
 void PhysicalNumber::setUnits(double units){ this->units = units; };
 
 double PhysicalNumber::translateOther(const PhysicalNumber& other){
-    if(this->typeID == other.typeID){ //same types. maybe its not even needed.
-        return other.units;
-    }
     int dif = ((int)this->typeID - (int)other.typeID);
     if(dif % 3 != 0){
         throw runtime_error("Cannot convert");
@@ -36,6 +33,7 @@ double PhysicalNumber::translateOther(const PhysicalNumber& other){
                 break;
             }
     }
+    return -1; //never gets here.
 };
 
 PhysicalNumber PhysicalNumber::operator+(const PhysicalNumber& other){ return PhysicalNumber(this->units+translateOther(other), this->typeID); }; //add units same world
