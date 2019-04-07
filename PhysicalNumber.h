@@ -14,12 +14,12 @@ namespace ariel{
             Unit getTypeID(); //getter
             double getUnits(); //getter
             void setUnits(double units);
-            PhysicalNumber& operator+(const PhysicalNumber& other); //diff-types adding
+            PhysicalNumber operator+(const PhysicalNumber& other); //diff-types adding
             PhysicalNumber& operator+=(const PhysicalNumber& other); //adding
             PhysicalNumber& operator+ (); //unary plus.
-            PhysicalNumber& operator-(const PhysicalNumber& other); //diff-types minus
+            PhysicalNumber operator-(const PhysicalNumber& other); //diff-types minus
             PhysicalNumber& operator-=(const PhysicalNumber& other); //minus.
-            PhysicalNumber& operator- (); //unary minus.
+            PhysicalNumber operator- (); //unary minus.
             PhysicalNumber& operator++ ();
             PhysicalNumber& operator-- ();
             bool operator>(const PhysicalNumber& other);
