@@ -24,6 +24,7 @@ int main() {
 
     cout << boolalpha; // print booleans as strings from now on:
     cout << (a>b) << endl;  // Prints "true"
+    // cout << "because: a= " << a.getUnits() << " and b= " << a.translateOther(b) << endl;
     cout << (a<=b) << endl;  // Prints "false"
     cout << (a==PhysicalNumber(2000, Unit::M)) << endl;  // Prints "true"
 

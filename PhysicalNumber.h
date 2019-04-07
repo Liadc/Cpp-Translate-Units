@@ -13,6 +13,7 @@ namespace ariel{
             PhysicalNumber(double units, Unit type); //constructor
             Unit getTypeID(); //getter
             double getUnits(); //getter
+            void setUnits(double units);
             PhysicalNumber& operator+(const PhysicalNumber& other); //diff-types adding
             PhysicalNumber& operator+=(const PhysicalNumber& other); //adding
             PhysicalNumber& operator+ (); //unary plus.
@@ -30,6 +31,6 @@ namespace ariel{
             friend std::ostream& operator<<(std::ostream& os, PhysicalNumber pn);
             friend std::istream& operator>>(std::istream& is, PhysicalNumber pn);
         private:
-            PhysicalNumber& translateUnit(const PhysicalNumber& other,bool opCode);
+            double translateOther(const PhysicalNumber& other); //returns the other.units with type of This.type
     };
 };
