@@ -22,8 +22,8 @@ namespace ariel{
             PhysicalNumber operator- (); //unary minus.
             PhysicalNumber& operator++ ();
             PhysicalNumber& operator-- ();
-            PhysicalNumber& operator++ (int);
-            PhysicalNumber& operator-- (int);
+            PhysicalNumber operator++ (int);
+            PhysicalNumber operator-- (int);
             bool operator>(const PhysicalNumber& other);
             bool operator>=(const PhysicalNumber& other);
             bool operator== (const PhysicalNumber& other);
