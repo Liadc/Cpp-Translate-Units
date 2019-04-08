@@ -34,7 +34,8 @@ int main() {
     PhysicalNumber i(15, Unit::CM);
     PhysicalNumber j(10, Unit::M);
     PhysicalNumber k(1, Unit::SEC);
-
+    PhysicalNumber l(3, Unit::TON);
+    
     testcase
     .setname("Basic output")
     .CHECK_OUTPUT(a, "2[km]")
@@ -81,6 +82,8 @@ int main() {
     .CHECK_OUTPUT(e+i+f, "20.03[km]")
     .CHECK_OUTPUT(k+c, "7201[sec]")
     .CHECK_OUTPUT(k+k+k+k+k+k+k+k+k+k+k+k+k, "13[sec]")
+    .CHECK_OUTPUT((e++)++, "22[km]")
+    
     
 
     //Check Throws
@@ -103,10 +106,10 @@ int main() {
     .CHECK_THROWS(k+f)
 
     .CHECK_OK(istringstream("60[sec]") >> k)
+    .CHECK_OK(istringstream("1[ton]") >> l)
     .CHECK_OUTPUT((k += PhysicalNumber(1, Unit::HOUR)), "3601[sec]")
-    
-
-      .print(cout, /*show_grade=*/false);
+    .CHECK_OUTPUT((l += PhysicalNumber(1, Unit::TON)), "2[ton]")
+    .print(cout, /*show_grade=*/false);
       grade = testcase.grade();
     } else {
       testcase.print_signal(signal);

@@ -35,6 +35,25 @@ double PhysicalNumber::translateOther(const PhysicalNumber& other){
     }
     return -1; //never gets here.
 };
+PhysicalNumber& PhysicalNumber::operator++(){ //prefix - should be fixed
+    this->setUnits(this->getUnits()+1);
+    return *this;
+};
+
+PhysicalNumber& PhysicalNumber::operator++(int){
+    this->setUnits(this->getUnits()+1);
+    return *this;
+};
+
+PhysicalNumber& PhysicalNumber::operator--(){//prefix - should be fixed
+    this->setUnits(this->getUnits()-1);
+    return *this;
+};
+
+PhysicalNumber& PhysicalNumber::operator--(int){
+    this->setUnits(this->getUnits()-1);
+    return *this;
+};
 
 PhysicalNumber PhysicalNumber::operator+(const PhysicalNumber& other){ return PhysicalNumber(this->units+translateOther(other), this->typeID); }; //add units same world
 
