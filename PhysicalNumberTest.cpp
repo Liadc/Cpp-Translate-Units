@@ -105,6 +105,10 @@ int main() {
     .CHECK_THROWS(k+e)
     .CHECK_THROWS(k+f)
 
+      .CHECK_THROWS(istringstream("60[sc]") >> a)
+      .CHECK_THROWS(istringstream("60") >> a)
+      .CHECK_THROWS(istringstream("60[x]") >> a)
+
     .CHECK_OK(istringstream("60[sec]") >> k)
     .CHECK_OK(istringstream("1[ton]") >> l)
     .CHECK_OUTPUT((k += PhysicalNumber(1, Unit::HOUR)), "3601[sec]")
