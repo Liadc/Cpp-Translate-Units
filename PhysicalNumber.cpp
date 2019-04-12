@@ -89,7 +89,7 @@ bool PhysicalNumber::operator==(const PhysicalNumber& other){ return this->units
 bool PhysicalNumber::operator!=(const PhysicalNumber& other){ return this->units != translateOther(other); };
 
 ostream& ariel::operator<<(ostream& os, PhysicalNumber pn){
-    const char *types[] = { "cm","h","sec","m","kg","min","km","ton","hour" };
+    const char *types[] = { "cm","g","sec","m","kg","min","km","ton","hour" };
     return os << pn.getUnits() <<"[" << types[(int)pn.typeID] << "]";
  };
             
@@ -98,7 +98,7 @@ istream& ariel::operator>>(istream& is, PhysicalNumber& pn){
     is >> input;
     regex validate("([-])?([\\d]+([.][\\d]+)?)(\\[)((cm)|(m)|(km)|(g)|(kg)|(ton)|(sec)|(min)|(hour))(\\])");
     if(regex_match(input,validate)){
-        const char *types[] = { "cm","h","sec","m","kg","min","km","ton","hour" };
+        const char *types[] = { "cm","g","sec","m","kg","min","km","ton","hour" };
         Unit unit;
         int start = input.find('[');
         int end = input.find(']');
