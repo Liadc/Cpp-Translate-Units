@@ -36,7 +36,7 @@ double PhysicalNumber::translateOther(const PhysicalNumber& other){
     }
     return -1; //never gets here.
 };
-PhysicalNumber& PhysicalNumber::operator++(){ //prefix - should be fixed
+PhysicalNumber& PhysicalNumber::operator++(){ //prefix
     ++units;
     return *this;
 };
@@ -47,7 +47,7 @@ PhysicalNumber PhysicalNumber::operator++(int){
     return old;
 };
 
-PhysicalNumber& PhysicalNumber::operator--(){//prefix - should be fixed
+PhysicalNumber& PhysicalNumber::operator--(){
     --units;
     return *this;
 };
@@ -98,8 +98,7 @@ istream& ariel::operator>>(istream& is, PhysicalNumber& pn){
     is >> input;
     regex validate("([-])?([\\d]+([.][\\d]+)?)(\\[)((cm)|(m)|(km)|(g)|(kg)|(ton)|(sec)|(min)|(hour))(\\])");
     if(regex_match(input,validate)){
-        //slice "input" here, put values into pn object.
-   const char *types[] = { "cm","h","sec","m","kg","min","km","ton","hour" };
+        const char *types[] = { "cm","h","sec","m","kg","min","km","ton","hour" };
         Unit unit;
         int start = input.find('[');
         int end = input.find(']');
@@ -125,6 +124,5 @@ istream& ariel::operator>>(istream& is, PhysicalNumber& pn){
     else{
         is.setstate(ios::failbit);
     }
-    //update needed with regex.
     return is;
 };
