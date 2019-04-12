@@ -27,10 +27,10 @@ double PhysicalNumber::translateOther(const PhysicalNumber& other){
         dif /= 3;
         switch((int)other.typeID % 3){
             case 0:case 1: //Length or Mass cases
-                return other.units*(pow(1000,(-dif)));
+                return other.units*(pow(1000,(-dif))*1.0);
                 break;
             case 2: //Time case
-                return other.units*(pow(60,(-dif)));
+                return other.units*(pow(60,(-dif)*1.0));
                 break;
             }
     }

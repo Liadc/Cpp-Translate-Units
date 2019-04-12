@@ -111,7 +111,7 @@ int main() {
 
     .CHECK_OK(istringstream("60[sec]") >> k)
     .CHECK_OK(istringstream("1[ton]") >> l)
-    .CHECK_OUTPUT((k += PhysicalNumber(1, Unit::HOUR)), "3601[sec]")
+    .CHECK_OUTPUT((k += PhysicalNumber(1, Unit::HOUR)), "3660[sec]")
     .CHECK_OUTPUT((l += PhysicalNumber(1, Unit::TON)), "2[ton]")
     .print(cout, /*show_grade=*/false);
       grade = testcase.grade();
