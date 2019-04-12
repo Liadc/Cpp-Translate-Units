@@ -15,7 +15,7 @@ PhysicalNumber::PhysicalNumber(double units, Unit typeID){
 
 Unit PhysicalNumber::getTypeID(){ return this->typeID; };
 
-double PhysicalNumber::getUnits(){ return this->units; };
+double PhysicalNumber::getUnits(){ return 1.0f*this->units; };
 
 void PhysicalNumber::setUnits(double units){ this->units = units; };
 
@@ -27,10 +27,10 @@ double PhysicalNumber::translateOther(const PhysicalNumber& other){
         dif /= 3;
         switch((int)other.typeID % 3){
             case 0:case 1: //Length or Mass cases
-                return other.units*(pow(1000,(-dif))*1.0);
+                return (double)other.units*(pow(1000,(-dif)));
                 break;
             case 2: //Time case
-                return other.units*(pow(60,(-dif)*1.0));
+                return (double)other.units*(pow(60,(-dif)));
                 break;
             }
     }
@@ -58,7 +58,9 @@ PhysicalNumber PhysicalNumber::operator--(int){
     return old;
 };
 
-PhysicalNumber PhysicalNumber::operator+(const PhysicalNumber& other){ return PhysicalNumber(this->units+translateOther(other), this->typeID); }; //add units same world
+PhysicalNumber PhysicalNumber::operator+(const PhysicalNumber& other){ 
+    return PhysicalNumber(1.0f*(this->units+translateOther(other)), this->typeID);
+     }; //add units same world
 
 PhysicalNumber PhysicalNumber::operator-(const PhysicalNumber& other){ return PhysicalNumber(this->units-translateOther(other), this->typeID); }; //decrease units same world
 
@@ -88,9 +90,9 @@ bool PhysicalNumber::operator==(const PhysicalNumber& other){ return this->units
 
 bool PhysicalNumber::operator!=(const PhysicalNumber& other){ return this->units != translateOther(other); };
 
-ostream& ariel::operator<<(ostream& os, PhysicalNumber pn){
+ostream& ariel::operator<<(ostream& os,const  PhysicalNumber& pn){
     const char *types[] = { "cm","g","sec","m","kg","min","km","ton","hour" };
-    return os << pn.getUnits() <<"[" << types[(int)pn.typeID] << "]";
+    return os << pn.units<<"[" << types[(int)pn.typeID] << "]";
  };
             
 istream& ariel::operator>>(istream& is, PhysicalNumber& pn){

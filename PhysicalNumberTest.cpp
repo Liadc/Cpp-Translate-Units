@@ -35,6 +35,9 @@ int main() {
     PhysicalNumber j(10, Unit::M);
     PhysicalNumber k(1, Unit::SEC);
     PhysicalNumber l(3, Unit::TON);
+    PhysicalNumber m(3.0, Unit::KM);
+    PhysicalNumber n(0.0002, Unit::KM);
+
     
     testcase
     .setname("Basic output")
@@ -42,6 +45,7 @@ int main() {
     .CHECK_OUTPUT(b, "300[m]")
 
     .setname("Compatible dimensions")
+    .CHECK_OUTPUT(m + n, "3.0002[km]")
     .CHECK_OUTPUT(b+a, "2300[m]")
     .CHECK_OUTPUT((a+=b), "2.3[km]")
     .CHECK_OUTPUT(a, "2.3[km]")

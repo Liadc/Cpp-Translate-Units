@@ -30,7 +30,7 @@ namespace ariel{
             bool operator!= (const PhysicalNumber& other);
             bool operator<(const PhysicalNumber& other);
             bool operator<=(const PhysicalNumber& other);
-            friend std::ostream& operator<<(std::ostream& os, PhysicalNumber pn);
+            friend std::ostream& operator<<(std::ostream& os, const PhysicalNumber& pn);
             friend std::istream& operator>>(std::istream& is, PhysicalNumber& pn);
         private:
             double translateOther(const PhysicalNumber& other); //returns the other.units with type of This.type
