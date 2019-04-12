@@ -36,7 +36,7 @@ int main() {
     PhysicalNumber k(1, Unit::SEC);
     PhysicalNumber l(3, Unit::TON);
     PhysicalNumber m(3.0, Unit::KM);
-    PhysicalNumber n(0.0002, Unit::KM);
+    PhysicalNumber n(2, Unit::CM);
 
     
     testcase
@@ -46,6 +46,8 @@ int main() {
 
     .setname("Compatible dimensions")
     .CHECK_OUTPUT(m + n, "3.0002[km]")
+    .CHECK_OUTPUT(m - n, "2.9998[km]")
+    .CHECK_OUTPUT(g - h, "19.75[hour]")
     .CHECK_OUTPUT(b+a, "2300[m]")
     .CHECK_OUTPUT((a+=b), "2.3[km]")
     .CHECK_OUTPUT(a, "2.3[km]")
@@ -80,10 +82,9 @@ int main() {
     .CHECK_OUTPUT(g, "20[hour]")
     .CHECK_OUTPUT(h, "15[min]")
     .CHECK_OUTPUT(h+g, "1215[min]")
-    .CHECK_OUTPUT(i+f, "30015[cm]")
-    .CHECK_OUTPUT(i+e, "2e+07[cm]")
-    .CHECK_OUTPUT(e+i, "20[km]")
-    .CHECK_OUTPUT(e+i+f, "20.03[km]")
+    .CHECK_OUTPUT(i+f, "3015[cm]")
+    .CHECK_OUTPUT(e+i, "20.0015[km]")
+    .CHECK_OUTPUT(e+i+f, "20.0315[km]")
     .CHECK_OUTPUT(k+c, "7201[sec]")
     .CHECK_OUTPUT(k+k+k+k+k+k+k+k+k+k+k+k+k, "13[sec]")
     // .CHECK_OUTPUT((e++)++, "22[km]")  //does not compile on badkan website.

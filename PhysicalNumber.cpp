@@ -24,13 +24,38 @@ double PhysicalNumber::translateOther(const PhysicalNumber& other){
     if(dif % 3 != 0){
         throw runtime_error("Cannot convert");
     } else{
-        dif /= 3;
+        dif = dif/3;
         switch((int)other.typeID % 3){
-            case 0:case 1: //Length or Mass cases
-                return (double)other.units*(pow(1000,(-dif)));
+            case 0:                        
+                if((int)this->typeID == (int)other.typeID){  
+                    return other.units;
+                    break;
+                }else if((int)this->typeID == 0 && (int)other.typeID == 3){
+                    return other.units*100*1.0;
+                    break;  
+                }else if((int)this->typeID == 0 && (int)other.typeID == 6 ){
+                    return other.units*10000*1.0f;
+                    break;
+                }else if((int)this->typeID == 3 && (int)other.typeID == 0 ){
+                    return other.units/100*1.0f;
+                    break;
+                }else if((int)this->typeID == 6 && (int)other.typeID == 0 ){
+                    return other.units/10000*1.0f;
+                    break;
+                }else if((int)this->typeID == 6 && (int)other.typeID == 3 ){
+                    return other.units/1000*1.0f;
+                    break;
+                }else{ // 6 to 3
+                    return other.units*1000*1.0;
+                    break;
+                }
+                break;
+
+            case 1: //Length or Mass cases
+                return other.units*1.0f*(pow(1000.0,(-dif)));
                 break;
             case 2: //Time case
-                return (double)other.units*(pow(60,(-dif)));
+                return (double)other.units*(pow(60.0,(-dif)));
                 break;
             }
     }
