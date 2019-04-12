@@ -104,7 +104,7 @@ istream& ariel::operator>>(istream& is, PhysicalNumber& pn){
         int end = input.find(']');
         map<string,Unit> unitMap;
         unitMap["cm"] = Unit::CM;
-        unitMap["g"] = Unit::HOUR;
+        unitMap["g"] = Unit::G;
         unitMap["sec"] = Unit::SEC;
         unitMap["m"] = Unit::M;
         unitMap["kg"] = Unit::KG;
