@@ -93,16 +93,37 @@ ostream& ariel::operator<<(ostream& os, PhysicalNumber pn){
     return os << pn.getUnits() <<"[" << types[(int)pn.typeID] << "]";
  };
             
-istream& ariel::operator>>(istream& is, PhysicalNumber pn){
+istream& ariel::operator>>(istream& is, PhysicalNumber& pn){
     string input;
     is >> input;
     regex validate("([-])?([\\d]+([.][\\d]+)?)(\\[)((cm)|(m)|(km)|(g)|(kg)|(ton)|(sec)|(min)|(hour))(\\])");
     if(regex_match(input,validate)){
         //slice "input" here, put values into pn object.
-        cout << "Valid" << endl;
+   const char *types[] = { "cm","h","sec","m","kg","min","km","ton","hour" };
+        Unit unit;
+        int start = input.find('[');
+        int end = input.find(']');
+        map<string,Unit> unitMap;
+        unitMap["cm"] = Unit::CM;
+        unitMap["h"] = Unit::HOUR;
+        unitMap["sec"] = Unit::SEC;
+        unitMap["m"] = Unit::M;
+        unitMap["kg"] = Unit::KG;
+        unitMap["min"] = Unit::MIN;
+        unitMap["km"] = Unit::KM;
+        unitMap["ton"] = Unit::TON;
+        unitMap["hour"] = Unit::HOUR;
+ 
+        double value = stod(input.substr(0,start));
+        string type = input.substr(start+1,end-start-1);
+        unit = unitMap.find(type)->second;
+
+        pn.units = value;
+        pn.typeID = unit;
+
     }
     else{
-        throw runtime_error("Invalid input for istream");
+        is.setstate(ios::failbit);
     }
     //update needed with regex.
     return is;
