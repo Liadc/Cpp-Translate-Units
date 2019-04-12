@@ -3,7 +3,6 @@
 #include <iostream>
 #include <regex>
 #include <cmath>
-#include <bits/stdc++.h>
 //Made by: Liad Cohen & Timor Sharabi.
 
 using namespace std;
@@ -91,7 +90,7 @@ bool PhysicalNumber::operator!=(const PhysicalNumber& other){ return this->units
 
 ostream& ariel::operator<<(ostream& os, PhysicalNumber pn){
     const char *types[] = { "cm","g","sec","m","kg","min","km","ton","hour" };
-    return os << fixed << setprecision(6) << pn.getUnits() <<"[" << types[(int)pn.typeID] << "]";
+    return os << pn.getUnits() <<"[" << types[(int)pn.typeID] << "]";
  };
             
 istream& ariel::operator>>(istream& is, PhysicalNumber& pn){
