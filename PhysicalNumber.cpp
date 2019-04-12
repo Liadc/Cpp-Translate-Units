@@ -1,6 +1,7 @@
 #include "PhysicalNumber.h"
 #include <stdexcept>
 #include <iostream>
+#include <regex>
 #include <cmath>
 //Made by: Liad Cohen & Timor Sharabi.
 
@@ -93,6 +94,16 @@ ostream& ariel::operator<<(ostream& os, PhysicalNumber pn){
  };
             
 istream& ariel::operator>>(istream& is, PhysicalNumber pn){
+    string input;
+    is >> input;
+    regex validate("([-])?([\\d]+([.][\\d]+)?)(\\[)((cm)|(m)|(km)|(g)|(kg)|(ton)|(sec)|(min)|(hour))(\\])");
+    if(regex_match(input,validate)){
+        //slice "input" here, put values into pn object.
+        cout << "Valid" << endl;
+    }
+    else{
+        throw runtime_error("Invalid input for istream");
+    }
     //update needed with regex.
     return is;
 };
