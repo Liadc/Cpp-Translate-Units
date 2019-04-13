@@ -25,7 +25,7 @@ double PhysicalNumber::translateOther(const PhysicalNumber& other){
     if(dif % 3 != 0){
         throw runtime_error("Cannot convert");
     } else{
-        dif = dif/3;
+        dif /= 3;
         double mult = 1000.0; 
         bool flag = false;
         switch((int)other.typeID % 3){
@@ -45,13 +45,13 @@ double PhysicalNumber::translateOther(const PhysicalNumber& other){
                     return other.units/mult;
                     break;
                 }
-                return other.units*(1.0f*(pow(1000.0,(-dif))));
+                return other.units*(pow(1000.0,(-dif)));
                 break;
             case 1: //Mass cases
-                return other.units*(1.0f*(pow(1000.0,(-dif))));
+                return other.units*1.0f*(pow(1000.0,(-dif)));
                 break;
             case 2: //Time case
-                return other.units*(1.0f*(pow(60.0,(-dif))));
+                return other.units*1.0f*(pow(60.0,(-dif)));
                 break;
             }
     }
