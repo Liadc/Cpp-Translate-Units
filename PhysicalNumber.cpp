@@ -30,6 +30,8 @@ double PhysicalNumber::translateOther(const PhysicalNumber& other){
             case 0: //Length case
                 if(((int)this->typeID == 0 && (int)other.typeID == 3) || ((int)this->typeID == 3 && (int)other.typeID == 0)){  
                     mult = 100.0;
+                }else if(((int)this->typeID == 0 && (int)other.typeID == 6) || ((int)this->typeID == 6 && (int)other.typeID == 0)){  
+                    mult = 100000.0; //100k
                 }
                 return (double)other.units*(pow(mult,(-dif)));
                 break;
