@@ -37,21 +37,23 @@ double PhysicalNumber::translateOther(const PhysicalNumber& other){
                     mult = 100000.0;
                     flag = true;
                 }
-                if(flag && dif<0){
-                    return other.units*mult;
-                    break;
-                }
-                else if (flag && dif>0){
-                    return other.units/mult;
-                    break;
+                if(flag){
+                    if(dif<0){
+                        return other.units*mult;
+                        break;
+                    }
+                    else{
+                        return other.units/mult;
+                        break;
+                    }
                 }
                 return other.units*(pow(1000.0,(-dif)));
                 break;
             case 1: //Mass cases
-                return other.units*1.0f*(pow(1000.0,(-dif)));
+                return other.units*(pow(1000.0,(-dif)));
                 break;
             case 2: //Time case
-                return other.units*1.0f*(pow(60.0,(-dif)));
+                return other.units*(pow(60.0,(-dif)));
                 break;
             }
     }
