@@ -35,7 +35,7 @@ double PhysicalNumber::translateOther(const PhysicalNumber& other){
                     mult = 1000.0f;
                     break;
                 }
-                return (double)(other.units/mult)*(pow(1,(double)(-dif)));
+                return (double)(other.units*(pow(mult,(double)(-dif))));
                 break;
             case 1: //Mass cases
                 return (double)other.units*(pow(1000.0f,(double)(-dif)));
