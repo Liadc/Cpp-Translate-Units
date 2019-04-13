@@ -25,21 +25,21 @@ double PhysicalNumber::translateOther(const PhysicalNumber& other){
         throw runtime_error("Cannot convert");
     } else{
         dif = dif/3;
-        double mult = 1000.0; 
+        long double mult = 1000.0; 
         switch((int)other.typeID % 3){
             case 0: //Length case
                 if(((int)this->typeID == 0 && (int)other.typeID == 3) || ((int)this->typeID == 3 && (int)other.typeID == 0)){  
-                    mult = 100.0f;
+                    mult = 100.0;
                 }else if(((int)this->typeID == 0 && (int)other.typeID == 6) || ((int)this->typeID == 6 && (int)other.typeID == 0)){  
-                    mult = 1000.0f;
+                    mult = 100000.0;
                 }
-                return (double)(other.units*1.0f*(pow(mult,(double)(-dif))));
+                return (double)(other.units*1.0f*(pow(mult,(-1.0*dif))));
                 break;
             case 1: //Mass cases
-                return (double)other.units*1.0f*(pow(1000.0f,(double)(-dif)));
+                return (double)other.units*1.0f*(pow(1000.0,(-1.0*dif)));
                 break;
             case 2: //Time case
-                return (double)other.units*1.0f*(pow(60.0f,(double)(-dif)));
+                return (double)other.units*1.0f*(pow(60.0,(-1.0*dif)));
                 break;
             }
     }
