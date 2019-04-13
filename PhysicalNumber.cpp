@@ -33,13 +33,13 @@ double PhysicalNumber::translateOther(const PhysicalNumber& other){
                 }else if(((int)this->typeID == 0 && (int)other.typeID == 6) || ((int)this->typeID == 6 && (int)other.typeID == 0)){  
                     mult = 100000.0*1.0f; //100k
                 }
-                return other.units*(pow(mult*1.0f,(-dif)));
+                return (double)other.units*(pow(mult*1.0f,(-dif)));
                 break;
             case 1: //Mass cases
-                return other.units*1.0f*(pow(1000.0*1.0f,(-dif)));
+                return (double)other.units*(pow(1000.0f,(-dif)));
                 break;
             case 2: //Time case
-                return other.units*(pow(60.0*1.0f,(-dif)));
+                return (double)other.units*(pow(60.0f,(-dif)));
                 break;
             }
     }
