@@ -3,6 +3,7 @@
 #include <iostream>
 #include <regex>
 #include <cmath>
+#include <limits>
 //Made by: Liad Cohen & Timor Sharabi.
 
 using namespace std;
@@ -26,14 +27,25 @@ double PhysicalNumber::translateOther(const PhysicalNumber& other){
     } else{
         dif = dif/3;
         double mult = 1000.0; 
+        bool flag = false;
         switch((int)other.typeID % 3){
             case 0: //Length case
                 if(((int)this->typeID == 0 && (int)other.typeID == 3) || ((int)this->typeID == 3 && (int)other.typeID == 0)){  
                     mult = 100.0;
+                    flag = true;
                 }else if(((int)this->typeID == 0 && (int)other.typeID == 6) || ((int)this->typeID == 6 && (int)other.typeID == 0)){  
                     mult = 100000.0;
+                    flag = true;
                 }
-                return (other.units*(1.0f*(pow(mult,(-dif)))));
+                if(flag && dif<0){
+                    return other.units*mult;
+                    break;
+                }
+                else if (flag && dif>0){
+                    return other.units/mult;
+                    break;
+                }
+                return other.units*(1.0f*(pow(1000.0,(-dif))));
                 break;
             case 1: //Mass cases
                 return other.units*(1.0f*(pow(1000.0,(-dif))));
@@ -101,7 +113,8 @@ bool PhysicalNumber::operator!=(const PhysicalNumber& other){ return this->units
 
 ostream& ariel::operator<<(ostream& os,const  PhysicalNumber& pn){
     const char *types[] = { "cm","g","sec","m","kg","min","km","ton","hour" };
-    return os << pn.units<<"[" << types[(int)pn.typeID] << "]";
+    os.precision(8);
+    return os << pn.units <<"[" << types[(int)pn.typeID] << "]";
  };
             
 istream& ariel::operator>>(istream& is, PhysicalNumber& pn){
