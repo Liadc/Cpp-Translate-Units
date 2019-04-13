@@ -113,7 +113,7 @@ bool PhysicalNumber::operator!=(const PhysicalNumber& other){ return this->units
 
 ostream& ariel::operator<<(ostream& os,const  PhysicalNumber& pn){
     const char *types[] = { "cm","g","sec","m","kg","min","km","ton","hour" };
-    os.precision(8);
+    os.precision(6);
     return os << pn.units <<"[" << types[(int)pn.typeID] << "]";
  };
             
