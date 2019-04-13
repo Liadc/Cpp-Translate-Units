@@ -29,11 +29,13 @@ double PhysicalNumber::translateOther(const PhysicalNumber& other){
         switch((int)other.typeID % 3){
             case 0: //Length case
                 if(((int)this->typeID == 0 && (int)other.typeID == 3) || ((int)this->typeID == 3 && (int)other.typeID == 0)){  
-                    mult = 100.0*1.0f;
+                    return other.units/100*1.0f;
+                    break;
                 }else if(((int)this->typeID == 0 && (int)other.typeID == 6) || ((int)this->typeID == 6 && (int)other.typeID == 0)){  
-                    mult = 100000.0*1.0f; //100k
+                    return other.units/100000*1.0f;
+                    break;
                 }
-                return (double)other.units*(pow(mult*1.0f,(-dif)));
+                return (double)other.units*(pow(mult,(-dif)));
                 break;
             case 1: //Mass cases
                 return (double)other.units*(pow(1000.0f,(-dif)));
